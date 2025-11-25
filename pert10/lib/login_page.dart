@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'register_page.dart';
 import 'session_manager.dart';
-
+import 'database/db_helper.dart';
+import 'models/user.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -19,8 +20,9 @@ class _LoginPageState extends State<LoginPage> {
     String username = _usernameController.text;
     String password = _passwordController.text;
 
-    // pakai data dummy dulu
-    if (username == 'admin' && password == '12345') {
+    User? user = await DbHelper.instance.login(username, password);
+
+    if (user != null) {
       await SessionManager.saveUser(username);
       Navigator.pushReplacement(
         context,
@@ -28,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Username atau password salah')),
+        const SnackBar(content: Text('username atau password salah')),
       );
     }
   }
@@ -36,7 +38,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
+      appBar: AppBar(
+        title: const Text('Halaman Login'),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -48,8 +52,8 @@ class _LoginPageState extends State<LoginPage> {
             ),
             TextField(
               controller: _passwordController,
-              obscureText: true,
               decoration: const InputDecoration(labelText: 'Password'),
+              obscureText: true,
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -57,14 +61,17 @@ class _LoginPageState extends State<LoginPage> {
               child: const Text('Login'),
             ),
             TextButton(
-              onPressed: (){Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const RegisterPage()));}
-              , child: const Text('Belum punya akun? Daftar disini'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const RegisterPage()),
+                );
+              },
+              child: const Text('Belum punya akun? Daftar di sini'),
             ),
           ],
         ),
       ),
     );
   }
-} 
+}
