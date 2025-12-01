@@ -1,26 +1,28 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SessionManager {
-  static const String keyUsername = 'Username';
-  static const String keyIsLoggedIn = 'IsLoggedIn';
+  static const String _keyUsername = 'username';
 
+  // Save user session
   static Future<void> saveUser(String username) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString(keyUsername, username);
-    await prefs.setBool(keyIsLoggedIn, true);
+    await prefs.setString(_keyUsername, username);
   }
-  static Future<String?> getUsername() async {
+
+  // Get current user session
+  static Future<String?> getUser() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getString(keyUsername);
+    return prefs.getString(_keyUsername);
+  }
+
+  // Clear user session
+  static Future<void> clearSession() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(_keyUsername);
   }
 
   static Future<bool> isLoggedIn() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(keyIsLoggedIn) ?? false;
-  }
-
-  static Future<void> logout() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
+    // Replace this with your actual logic to check if the user is logged in
+    return Future.value(false);
   }
 }

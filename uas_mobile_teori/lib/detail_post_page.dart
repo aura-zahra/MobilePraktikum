@@ -171,7 +171,7 @@ class DetailPostPage extends StatelessWidget {
                       Expanded(
                         child: OutlinedButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/booking_session');
+                            Navigator.pushNamed(context, '/booking');
                           },
                           style: OutlinedButton.styleFrom(
                             side: const BorderSide(

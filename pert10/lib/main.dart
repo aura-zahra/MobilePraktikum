@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'home_page.dart';
 import 'login_page.dart';
-import 'register_page.dart';
 import 'session_manager.dart';
 
 void main() {

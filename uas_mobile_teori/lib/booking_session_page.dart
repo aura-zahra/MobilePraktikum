@@ -107,7 +107,7 @@ class _BookingSessionPageState extends State<BookingSessionPage> {
 
                   const SizedBox(height: 30),
 
-                  // ============ DATE SELECTOR ============
+                  // ============ DATE FORM ============
                   const Text(
                     "Pilih Tanggal",
                     style: TextStyle(
@@ -118,52 +118,23 @@ class _BookingSessionPageState extends State<BookingSessionPage> {
 
                   const SizedBox(height: 10),
 
-                  SizedBox(
-                    height: 60,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: availableDates.length,
-                      itemBuilder: (context, index) {
-                        final isSelected = selectedDateIndex == index;
-                        return GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              selectedDateIndex = index;
-                            });
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.only(right: 12),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 16, vertical: 12),
-                            decoration: BoxDecoration(
-                              color:
-                                  isSelected ? const Color(0xFF7A0C29) : Colors.white,
-                              borderRadius: BorderRadius.circular(14),
-                              border: Border.all(
-                                color: isSelected
-                                    ? const Color(0xFF7A0C29)
-                                    : Colors.grey.shade300,
-                              ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                availableDates[index],
-                                style: TextStyle(
-                                  color: isSelected ? Colors.white : Colors.black87,
-                                  fontWeight:
-                                      isSelected ? FontWeight.w700 : FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
+                  TextField(
+                    decoration: InputDecoration(
+                      hintText: "Masukkan tanggal (contoh: 12 Jan 2025)",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 12),
                     ),
+                    onChanged: (value) {
+                      // Handle date input
+                    },
                   ),
 
                   const SizedBox(height: 30),
 
-                  // ============ TIME SELECTOR ============
+                  // ============ TIME FORM ============
                   const Text(
                     "Pilih Jam",
                     style: TextStyle(
@@ -174,44 +145,18 @@ class _BookingSessionPageState extends State<BookingSessionPage> {
 
                   const SizedBox(height: 10),
 
-                  Wrap(
-                    spacing: 12,
-                    runSpacing: 12,
-                    children: List.generate(
-                      availableTimes.length,
-                      (index) {
-                        final isSelected = selectedTimeIndex == index;
-                        return GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              selectedTimeIndex = index;
-                            });
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 12),
-                            decoration: BoxDecoration(
-                              color:
-                                  isSelected ? const Color(0xFF7A0C29) : Colors.white,
-                              borderRadius: BorderRadius.circular(14),
-                              border: Border.all(
-                                color: isSelected
-                                    ? const Color(0xFF7A0C29)
-                                    : Colors.grey.shade300,
-                              ),
-                            ),
-                            child: Text(
-                              availableTimes[index],
-                              style: TextStyle(
-                                color: isSelected ? Colors.white : Colors.black87,
-                                fontWeight:
-                                    isSelected ? FontWeight.bold : FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
+                  TextField(
+                    decoration: InputDecoration(
+                      hintText: "Masukkan jam (contoh: 09:00)",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 12),
                     ),
+                    onChanged: (value) {
+                      // Handle time input
+                    },
                   ),
 
                   const SizedBox(height: 40),
